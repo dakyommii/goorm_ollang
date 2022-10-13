@@ -24,9 +24,19 @@ public class RegisterDao {
 
 
     public int addCeo(PostUserReq postUserReq){
-        String createUserQuery = "insert into ceo (c_name,c_gender,c_age,c_job,c_skill) VALUES (?,?,?,?,?)";
-        Object[] createUserParams = new Object[]{postUserReq.getName(),postUserReq.getGender(),postUserReq.getAge(),postUserReq.getJob(),postUserReq.getSkill()};
-        this.jdbcTemplate.update(createUserQuery, createUserParams);
+        String createCeoQuery = "insert into ceo (c_name,c_gender,c_age,c_job,c_skill) VALUES (?,?,?,?,?)";
+        Object[] createCeoParams = new Object[]{postUserReq.getName(),postUserReq.getGender(),postUserReq.getAge(),postUserReq.getJob(),postUserReq.getSkill()};
+        this.jdbcTemplate.update(createCeoQuery, createCeoParams);
+
+        String lastInsertIdQuery = "select last_insert_id()";
+        return this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
+
+    }
+
+    public int addWorker(PostUserReq postUserReq){
+        String createWorkerQuery = "insert into worker (w_name,w_gender,w_age,w_job,w_skill) VALUES (?,?,?,?,?)";
+        Object[] createWorkerParams = new Object[]{postUserReq.getName(),postUserReq.getGender(),postUserReq.getAge(),postUserReq.getJob(),postUserReq.getSkill()};
+        this.jdbcTemplate.update(createWorkerQuery, createWorkerParams);
 
         String lastInsertIdQuery = "select last_insert_id()";
         return this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);

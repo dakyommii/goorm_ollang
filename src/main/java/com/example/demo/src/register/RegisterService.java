@@ -50,6 +50,23 @@ public class RegisterService {
         }
     }
 
+    /* 구직자 등록 */
+    public void addWorker(PostUserReq postUserReq) throws BaseException {
+
+        try{
+            int worker_idx = registerDao.addWorker(postUserReq);
+
+            if(worker_idx == 0){
+                throw new BaseException(POST_FAIL_WORKER);
+            }
+
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
 
 
 

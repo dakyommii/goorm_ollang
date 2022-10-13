@@ -34,20 +34,7 @@ public class RegisterController {
 //        this.jwtService = jwtService;
     }
 
-//    /* 카테고리명 수정 */
-//    @ResponseBody
-//    @PatchMapping("modifyCategory")
-//    public BaseResponse<String> modifyCategory(@RequestBody PatchCategoryReq patchCategoryReq){
-//
-//        try {
-//
-//            menuService.modifyCategory(patchCategoryReq);
-//            String str = "카테고리명이 성공적으로 변경되었습니다.";
-//            return new BaseResponse<>(str);
-//        } catch (BaseException exception) {
-//            return new BaseResponse<>((exception.getStatus()));
-//        }
-//    }
+
 
     /* 정보 등록 */
     // ceo 정보
@@ -79,12 +66,49 @@ public class RegisterController {
         if(postUserReq.getName().length()>15)
             return new BaseResponse<>(POST_USERS_INVALID_LEN);
 
-
-
-
         try{
 
             registerService.addCeo(postUserReq);
+
+            String str = "성공적으로 등록되었습니다.";
+            return new BaseResponse<>(str);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    // ceo 정보
+    @ResponseBody
+    @PostMapping("/worker")
+    public BaseResponse<String> addWorker(@RequestBody PostUserReq postUserReq) {
+
+        //닉네임 공백 check
+        if(postUserReq.getName() == null)
+            return new BaseResponse<>(POST_USERS_EMPTY_NAME);
+
+        //성별 공백 check
+        if(postUserReq.getGender() == null)
+            return new BaseResponse<>(POST_USERS_EMPTY_GENDER);
+
+        //나이 공백 check
+        if(postUserReq.getAge() == null)
+            return new BaseResponse<>(POST_USERS_EMPTY_AGE);
+
+        //직업 공백 check
+        if(postUserReq.getJob() == null)
+            return new BaseResponse<>(POST_USERS_EMPTY_JOB);
+
+        //분야 공백 check
+        if(postUserReq.getSkill() == null)
+            return new BaseResponse<>(POST_USERS_EMPTY_SKILL);
+
+        //닉네임 길이 check
+        if(postUserReq.getName().length()>15)
+            return new BaseResponse<>(POST_USERS_INVALID_LEN);
+
+        try{
+
+            registerService.addWorker(postUserReq);
 
             String str = "성공적으로 등록되었습니다.";
             return new BaseResponse<>(str);

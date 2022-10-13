@@ -33,8 +33,12 @@ public enum BaseResponseStatus {
     POST_USERS_EMPTY_SKILL(false, 2005, "업무분야를 선택해주세요."),
     POST_USERS_INVALID_LEN(false, 2006, "닉네임은 10자 이내로 정해주세요"),
     POST_FAIL_CEO(false, 2007, "사장 등록에 실패했습니다."),
+    POST_FAIL_WORKER(false, 2008, "구직자 등록에 실패했습니다."),
 //    POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
 //    POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
+
+    // [GET] /view
+    ANNOUNCEMENT_EMPTY_SEARCH_KEYWORD(false, 2009, "검색어를 입력해주세요."),
 
 
 
@@ -64,6 +68,7 @@ public enum BaseResponseStatus {
 
 
     // 5000 : 필요시 만들어서 쓰세요
+
     // 6000 : 필요시 만들어서 쓰세요
 
 
