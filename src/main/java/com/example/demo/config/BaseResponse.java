@@ -9,10 +9,11 @@ import lombok.Getter;
 import static com.example.demo.config.BaseResponseStatus.SUCCESS;
 
 @Getter
-@AllArgsConstructor
+//@AllArgsConstructor
 @JsonPropertyOrder({"isSuccess", "code", "message", "result"})
 public class BaseResponse<T> {
     @JsonProperty("isSuccess")
+//    @JsonProperty("result")
     private final Boolean isSuccess;
     private final String message;
     private final int code;

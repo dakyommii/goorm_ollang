@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class GetAnnounceRes {
+//    private int a_idx;
     private String title;
 //    private String category;
     private String onoff;

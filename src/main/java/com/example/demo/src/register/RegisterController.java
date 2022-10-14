@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static com.example.demo.config.BaseResponseStatus.*;
 
 @RestController
@@ -34,12 +36,21 @@ public class RegisterController {
 //        this.jwtService = jwtService;
     }
 
+//    @ResponseBody
+//    @RequestMapping(value = "memberRegi.do", method = RequestMethod.POST)
+//    public void memberRegi(String userName, MemberDto dto, HttpServletRequest request) {
+//        System.out.println(request.getParameter("userName"));
+//        System.out.println(dto.getUserName());
+//        System.out.println(userName);
+//    }
+
 
 
     /* 정보 등록 */
     // ceo 정보
     @ResponseBody
     @PostMapping("/ceo")
+//    @RequestMapping(value = "register/ceo", method = RequestMethod.POST)
     public BaseResponse<String> addCeo(@RequestBody PostUserReq postUserReq) {
 
         //닉네임 공백 check

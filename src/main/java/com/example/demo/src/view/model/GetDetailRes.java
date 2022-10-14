@@ -19,7 +19,7 @@ public class GetDetailRes {
     private String content;
     private int total_time;
     private int pay;
-//    private List<String> imgs;
+    private List<String> imgs;
 
 }
 

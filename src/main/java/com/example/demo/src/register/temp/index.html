@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+
+  <title>POST test</title>
+
+  <style>
+        * {
+            font-family: 'Gowun Batang', serif;
+            color: black;
+        }
+
+        .order {
+            width: 500px;
+            margin: 120px auto 0px auto;
+            padding-bottom: 60px;
+        }
+
+        .mybtn {
+            width: 100%;
+        }
+
+        .order > table {
+            margin : 40px 0;
+            font-size: 18px;
+        }
+
+        option {
+            color: black;
+        }
+    </style>
+  <script>
+<!--        $(document).ready(function () {});-->
+        function save_user() {
+
+            var name_give = document.getElementById("name").value;
+            var age_give = document.getElementById("age").value;
+            var gender_give = document.getElementById("gender").value;
+            var job_give = document.getElementById("job").value;
+            var skill_give = document.getElementById("skill").value;
+
+            $.ajax({
+                type: 'POST',
+                url: "ceoRegi.do",
+<!--                data: {name_give:name, age_give:age, gender_give:gender, job_give:job, skill_give:skill},-->
+                data: {name_give, age_give, gender_give, job_give, skill_give},
+                success: function (data) {
+                    alert("성공");
+<!--                    window.location.reload()-->
+                },
+                error : function(request,status,error){
+<!--                error : function(data){-->
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+<!--                        alert(name_give+" "+age_give+" "+gender_give+" "+job_give+" "+skill_give);-->
+                  }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="order">
+  <p>사용자 정보 입력</p>
+  <div class="order-info">
+    <div class="input-group mb-3">
+      <span class="input-group-text"> name </span>
+      <input id="name" type="text" class="form-control">
+    </div>
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="age">  age </label>
+      <select class="form-select" id="age">
+        <option selected> 나이를 선택해주세요 </option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">gender</span>
+      <input id="gender" type="text" class="form-control">
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">job </span>
+      <input id="job" type="text" class="form-control">
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text"> skill</span>
+      <input id="skill" type="text" class="form-control">
+    </div>
+    <button onclick="save_user()" type="button" class="btn btn-primary mybtn">확인</button>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">name</th>
+      <th scope="col">age</th>
+      <th scope="col">gender</th>
+      <th scope="col">job</th>
+      <th scope="col">skill</th>
+    </tr>
+    </thead>
+    <tbody id="order-box">
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

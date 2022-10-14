@@ -43,10 +43,10 @@ public class ViewProvider {
     }
 
     //공고 상세 조회
-    public List<GetDetailRes> getDetail() throws BaseException {
+    public GetDetailRes getDetail(int a_idx) throws BaseException {
 
         try{
-            List<GetDetailRes> getDetail = viewDao.getDetail();
+            GetDetailRes getDetail = viewDao.getDetail(a_idx);
             return getDetail;
         } catch(Exception exception){
             System.out.println(exception);
@@ -69,10 +69,10 @@ public class ViewProvider {
     }
 
     //검색 결과 조회
-    public List<GetAnnounceRes> getSearch(GetSearchReq getSearchReq) throws BaseException {
+    public List<GetAnnounceRes> getSearch(String keyword) throws BaseException {
 
         try{
-            List<GetAnnounceRes> getSearch = viewDao.getSearch(getSearchReq);
+            List<GetAnnounceRes> getSearch = viewDao.getSearch(keyword);
             return getSearch;
         } catch(Exception exception){
             System.out.println(exception);

@@ -6,6 +6,7 @@ import com.example.demo.src.view.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,15 +35,28 @@ public class ViewController {
     }
 
     /* 조회 */
+//    @ResponseBody
+//    @GetMapping("")
+//    public BaseResponse<List<GetAnnounceRes>> getAnnounce() {
+//        try{
+//            List<GetAnnounceRes> getAnnounce=viewProvider.getAnnounce();
+//
+//            return new BaseResponse<>(getAnnounce);
+//        } catch (BaseException exception){
+//            return new BaseResponse<>(exception.getStatus());
+//        }
+//    }
+
     @ResponseBody
     @GetMapping("")
-    public BaseResponse<List<GetAnnounceRes>> getAnnounce() {
+    public List<GetAnnounceRes> getAnnounce() {
         try{
             List<GetAnnounceRes> getAnnounce=viewProvider.getAnnounce();
 
-            return new BaseResponse<>(getAnnounce);
+            return getAnnounce;
         } catch (BaseException exception){
-            return new BaseResponse<>(exception.getStatus());
+            return null;
+//            return new BaseResponse<>(exception.getStatus());
         }
     }
 
@@ -61,14 +75,15 @@ public class ViewController {
 
     /* 상세 조회 */
     @ResponseBody
-    @GetMapping("/detail")
-    public BaseResponse<List<GetDetailRes>> getDetail() {
+    @GetMapping("/detail/{a_idx}")
+    public BaseResponse<GetDetailRes> getDetail(@PathVariable("a_idx") int a_idx) {
         try{
-            List<GetDetailRes> getDetail=viewProvider.getDetail();
+            GetDetailRes getDetail=viewProvider.getDetail(a_idx);
 
             return new BaseResponse<>(getDetail);
         } catch (BaseException exception){
             return new BaseResponse<>(exception.getStatus());
+
         }
     }
 
@@ -83,20 +98,23 @@ public class ViewController {
     /* 검색 */
     @ResponseBody
     @GetMapping("/search")
-    public BaseResponse<List<GetAnnounceRes>> getSearch(GetSearchReq getSearchReq) {
+    public BaseResponse<List<GetAnnounceRes>> getSearch(@RequestParam(value="keyword") String keyword) {
 
         //키워드 공백 check
-        if(getSearchReq.getKeyword()== null){
+        if(keyword== null){
             return new BaseResponse<>(ANNOUNCEMENT_EMPTY_SEARCH_KEYWORD);
         }
 
+
         try{
 
-            List<GetAnnounceRes> getSearch=viewProvider.getSearch(getSearchReq);
+            List<GetAnnounceRes> getSearch=viewProvider.getSearch(keyword);
 
             return new BaseResponse<>(getSearch);
+
         } catch (BaseException exception){
             return new BaseResponse<>(exception.getStatus());
+
         }
     }
 
